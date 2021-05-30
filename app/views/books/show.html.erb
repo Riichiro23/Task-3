@@ -1,0 +1,48 @@
+<div class = "title">
+  <% if flash[:notice] %>
+  <p style="color: #00ff00;"><%= flash[:notice] %></p>
+  <% end %>
+</div>
+
+  
+<main>
+ <div class = "container">
+  <div class = "row">
+   <div class = "col-md-3">
+    <!--共通部分（User info）
+    <%= render 'users/info', user: @book.user %>
+    <!--共通部分(New Books)-->
+
+   </div>
+   <!--ユーザー投稿一覧-->
+   <div class = "col-md-8 offset-md-1">
+    <h2>Book detail</h2>
+     <table class = "table">
+      <tbody>
+       <tr>
+        <td>
+         <%= attachment_image_tag @book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+         <!--titleレコードのリンク-->
+        </td>
+        <td>
+         <%= link_to book_path(@book) do %>
+         <%= @book.title %>
+         <% end %>
+        </td>
+        <td><%= @book.body %></td>
+        <td>
+
+   　    　<%= button_to "Edit", {controller: 'books', action: 'edit'}, {method: :get} %>
+
+        </td>
+        <td>
+
+          <%= button_to "Destroy", {controller: 'books', action: 'destroy'}, {method: :delete} %>
+        
+        </td>
+       </tr>
+      </tbody>
+     </table>
+   </div>
+ </div>
+</main>

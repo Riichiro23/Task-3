@@ -1,0 +1,23 @@
+<!--# マイページ編集画面  # (edit_user_path)  # (/users/:id/edit)-->
+
+<h1>User info</h1>
+<%= form_with model:@user, local:true do |f| %>
+
+           <!--name更新欄-->
+  <label for="inputName">Name</label>
+  <br>
+  <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%>
+  <br>
+  <br>
+              <!--画像設定用-->
+<%= f.attachment_field :profile_image %>
+  <br>
+  <br>
+            <!--Introduction 更新欄-->
+  <label for="inputIntroduction">Introduction</label>
+  <br>
+  <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction", placeholder:"自己紹介"%>
+  <br>
+  <br>
+  <%= f.submit "Update User" %>
+<% end %>
