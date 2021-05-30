@@ -1,3 +1,10 @@
+<% if book.errors.any? %>
+  <%= book.errors.count %>件のエラーが発生しました
+  <% book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
 <!--新規投稿画面-->
 <h2>New Book</h2>
 

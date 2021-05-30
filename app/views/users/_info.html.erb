@@ -1,3 +1,10 @@
+<% if user.errors.any? %>
+  <%= user.errors.count %>件のエラーが発生しました
+  <% user.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
 <!--共通部分(User info)-->
 <h2>User info</h2>
 <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
@@ -15,7 +22,9 @@
  </tbody>
 </table>
 <div class = "row">
-   <!--編集ボタン-->
+ <div class = "col-lg-4">
+ <%= link_to '編集', edit_user_path(@user), class: "btn btn-secondary" %>
+ </div>
 </div>
 
 
