@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+before_action :ensure_current_user, {only: [:edit, :update]}
 
     def create  # 新規投稿フォーム保存（部分テンプレート）
     @book = Book.new(book_params) # 投稿フォームの入力値を受け取る
@@ -25,6 +26,15 @@ class BooksController < ApplicationController
     @book= Book.new  # books#indexで、新規投稿画面を表示(部分テンプレート用)
     @user = current_user
     end
+
+# ログイン者とユーザー一致のときのみ編集ページにアクセス可
+   def ensure_current_user
+   @book = Book.find(params[:id])
+   if current_user.id != @book.user.id  # @book.user.id {「投稿した本」に対応する「投稿したユーザー」の「id」（投稿されている本と、その投稿をしたユーザーをひもづける) と、 current_user.id (今ログインしている人の「id」)が一致していなければ}
+    flash[:notice]="権限がありません"
+    redirect_to books_path
+   end
+   end
 
     def edit  # 投稿編集画面 # (edit_user_book) # ( /users/:user_id/books/:id/edit)
     @book = Book.find(params[:id])

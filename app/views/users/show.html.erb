@@ -27,7 +27,7 @@
         <th colspan="3"></th>
        </tr>
       </thead>
-      <tbody>  <!--@user.books  ： ユーザーのidに対応するidの投稿(1:N アソシエーション ) -->
+      <tbody>  <!--@user.books  ： そのidのユーザーの情報に紐づいた（そのidのユーザーが投稿した）投稿(1:N アソシエーション ) -->
        <% @user.books.each do |book| %>　　<!--最終的には、bookモデルのカラムとして表示させる-->
        <tr>
         <td><%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%></td>
