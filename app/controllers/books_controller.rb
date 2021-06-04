@@ -3,14 +3,16 @@ before_action :ensure_current_user, {only: [:edit, :update]}
 
     def create  # 新規投稿フォーム保存（部分テンプレート）
     @book = Book.new(book_params) # 投稿フォームの入力値を受け取る
-    @book.user_id = current_user.id  # 投稿者がログインしている場合は
+    @book.user_id = current_user.id  # create(投稿)したユーザーid = ログインしているユーザーid
     # binding.pry
     if @book.save   # 保存ができた場合は、
-    flash[:notice] ="You have created book successfully."
+    flash[:success] ="You have created book successfully."
     redirect_to book_path(@book) # books#showへ
-    else
+    else  
+     # books#indexにレンダーさせるためにbooks#indexの定義をここに記入
     @books = Book.all
     @user = current_user
+    # ----------------------------
     render :index
     end
     end
@@ -43,7 +45,7 @@ before_action :ensure_current_user, {only: [:edit, :update]}
     def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-    flash[:notice] ="You have updated book successfully."
+    flash[:success] ="You have updated book successfully."
     redirect_to book_path(@book.id) # 投稿詳細画面(books/show)
     else
     render :edit
@@ -53,6 +55,7 @@ before_action :ensure_current_user, {only: [:edit, :update]}
     def destroy  # 投稿の削除
     @book = Book.find(params[:id])
     @book.destroy
+    # binding.pry
     redirect_to books_path
     end
 

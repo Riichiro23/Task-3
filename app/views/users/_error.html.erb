@@ -1,0 +1,9 @@
+
+  <% if user.errors.any? %>
+  <div class = "error">
+     <%= user.errors.count %> error occurred 
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+  </div>
+ <% end %>

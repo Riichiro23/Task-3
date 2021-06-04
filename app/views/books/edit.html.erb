@@ -1,23 +1,23 @@
-<% if @book.errors.any? %>
-  <%= @book.errors.count %>件のエラーが発生しました
-  <% @book.errors.full_messages.each do |message| %>
-    <%= message %>
-  <% end %>
-<% end %>
+<!--エラー共通-->
+<%= render 'users/error', user: @book %>  <!--books#editアクションで、入力値が保存された@bookをレンダーのエラー文で判定にかける--> 
 
 <!--投稿編集画面-->
 <h1>Editing Book</h1>
 
 <%= form_with model:@book, local:true do |f| %>
   <label for="input_title">Title</label>
+  <br>
   <%= f.text_field :title, autofocus: true, id:"input_title", placeholder:"本のタイトル"%>
   <br>
   <br>
   <label for="input_body">Opinion</label>
+  <br>
   <%= f.text_field :body, autofocus: true, id:"input_body", placeholder:"本の感想"%>
   <br>
   <br>
   <%= f.submit "Update Book", class: "btn btn-success" %>
+  <br>
+  <br>
   <span>
   <%= link_to "Show", book_path(@book) %>
   <%= link_to "Back", books_path %>

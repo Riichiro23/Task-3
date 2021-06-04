@@ -1,9 +1,5 @@
-
-<div class = "title">
-  <% if flash[:notice] %>
-  <p style="color: #00ff00;"><%= flash[:notice] %></p>
-  <% end %>
-</div>
+<!--共通(Flashメッセージ)-->
+<%= render 'layouts/flash'%>
 
 <main>
  <div class = "container px-5 px-sm-5">
@@ -27,10 +23,18 @@
         <th colspan="3"></th>
        </tr>
       </thead>
-      <tbody>  <!--@user.books  ： そのidのユーザーの情報に紐づいた（そのidのユーザーが投稿した）投稿(1:N アソシエーション ) -->
+      <tbody>
+        　　　<!--@user.books  ： そのidのユーザーの情報に紐づいた（そのidのユーザーが投稿した）投稿を呼び出す(1:N アソシエーション ) -->
        <% @user.books.each do |book| %>　　<!--最終的には、bookモデルのカラムとして表示させる-->
        <tr>
-        <td><%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%></td>
+        <td>
+         <!--book.user.id-->
+         <!--users#showのビュー(現在)で、そのユーザーに対応する投稿情報を取り出すためeach文で、ユーザー情報から辿った本の情報(@user.books)を|book|にいれて定義した。-->
+         <!--今いるeach文(ユーザー情報から呼び出された投稿の情報が定義されている)の中で、投稿に紐づくユーザー情報を呼び出すには、投稿情報から再び、ユーザー情報を呼び出す必要がある。-->
+         <%= link_to user_path(book.user.id) do %>
+         <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+         <% end %>
+        </td>
         <td>
          <%= link_to book_path(book.id) do %>
           <%= book.title %>

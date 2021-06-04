@@ -1,12 +1,8 @@
-<% if book.errors.any? %>
-  <%= book.errors.count %>件のエラーが発生しました
-  <% book.errors.full_messages.each do |message| %>
-    <%= message %>
-  <% end %>
-<% end %>
+<!--エラー共通-->
+<%= render 'users/error', user: book %>  <!--books#createアクションで、入力値が保存された@bookをレンダー元のエラー文で判定にかける-->
 
 <!--新規投稿画面-->
-<h2>New Book</h2>
+<h2>New book</h2>
 
 <%= form_with model: book, local:true do |f| %>
 

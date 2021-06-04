@@ -1,9 +1,5 @@
-
-<div class = "title">
-  <% if flash[:notice] %>
-  <p style="color: #00ff00;"><%= flash[:notice] %></p>
-  <% end %>
-</div>
+<!--共通(Flashメッセージ)-->
+<%= render 'layouts/flash' %>
 
 <main>
  <div class = "container">
@@ -34,7 +30,7 @@
         </td>
         <td><%= @book.body %></td>
         <td>
-         <!--@book.user.id : ユーザー情報に基づいた詳細画面(books#show)を開いている人 = current_user.id : ログインしている人-->
+         <!--@book.user.id : 詳細画面(books#show)を開いているユーザーid = current_user.id : ログインしているユーザーid-->
          <% if @book.user.id == current_user.id %>
          <div class = "row">
           <%= link_to "Edit", edit_book_path(@book), class: "btn btn-success btn-sm btn-block active " %>
@@ -43,8 +39,8 @@
         </td>
         <td>
          <% if @book.user.id == current_user.id %>
-          <button type="submit" class="btn btn-danger" id="deletebtn" name="Destroy" >Destroy</button>
-         <% end %>
+          <%= link_to "Destroy", book_path(@book.id), method: :delete, class: "btn-sm btn-danger", "data-confirm" => "本当に消しますか？" %>
+         <% end %>      <!--book_path(@book.id), method: :delete  (booksのdestroyアクションに飛ばす。その後、destroyアクション内にて遷移先を呼び出す。)--> 　<!--(@book.id は、books#show(どの投稿を削除するのか)の引数として記述）-->
         </td>
        </tr>
       </tbody>
@@ -52,3 +48,5 @@
    </div>
  </div>
 </main>
+
+

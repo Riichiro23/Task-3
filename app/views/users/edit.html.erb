@@ -1,12 +1,7 @@
 <!--# マイページ編集画面  # (edit_user_path)  # (/users/:id/edit)-->
 
-<% if @user.errors.any? %>
-  <%= @user.errors.count %>件のエラーが発生しました
-  <% @user.errors.full_messages.each do |message| %>
-    <%= message %>
-  <% end %>
-<% end %>
-
+<!--エラー共通-->
+<%= render 'users/error', user: @user %>  <!--users#editアクションで、入力値が保存された@userをレンダー元のエラー文で判定にかける--> 
 
 <h1>User info</h1>
 <%= form_with model:@user, local:true do |f| %>

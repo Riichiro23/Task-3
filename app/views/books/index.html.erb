@@ -18,9 +18,14 @@
         </tr>
        </thead>
        <tbody>
-        <% @books.each do |book| %>
+        <!--@booksの中の全ての投稿情報を |book|にひとつずつ入れていく-->
+        <% @books.each do |book| %>  
         <tr> 
-         <td><%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%></td>
+         <td>
+          <%= link_to user_path(book.user.id) do %>
+           <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+          <% end %>             <!--book.user ： アソシエーションによって投稿データの情報から、対応するユーザー情報を引っ張り出すことができる。「books#indexアクションの@booksで取り出された投稿」に紐づくユーザー情報を呼び出す-->
+         </td>
          <td>
           <%= link_to book_path(book.id) do %>
           <%= book.title %>
