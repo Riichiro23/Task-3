@@ -5,13 +5,14 @@
  <div class = "container px-5 px-sm-5">
   <div class = "row">
    <div class = "col-md-3">
-    <!--共通部分（User info）
+    <!--共通部分（users/_info）
     <%= render 'users/info', user: @user %>
-    <!--共通部分(New Books)-->
+    <!--共通部分(books/_new)-->
     <%= render 'books/new', book: @book %>
    </div>
 
    <!--ユーザー投稿一覧-->
+   <!--※ 重要 (一つの特定のユーザー(user)に紐づく投稿(book)を表示させたい)-->
    <div class = "col-md-8 offset-md-1">
     <h2>Books</h2>
      <table class = "table table-hover table-inverse">

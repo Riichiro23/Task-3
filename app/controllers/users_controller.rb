@@ -5,20 +5,20 @@ class UsersController < ApplicationController
 
 def index
 # binding.pry
-@users = User.all
-@book = Book.new  # books#indexで、新規投稿画面を表示(部分テンプレート用)
-@user = current_user
+@users = User.all # users#index
+@book = Book.new  # 部分テンプレート(新規投稿)呼び出すために定義
+@user = current_user # 部分テンプレート(User info)呼び出すために定義 = 自分のユーザー情報
 end
 
 def show
-@user = User.find(params[:id])
+@user = User.find(params[:id]) #params([:id]では、urlのidを受け取って、それに対応するレコードを探してくる)
 @book = Book.new  # 部分テンプレート(新規投稿)
 end
 
 # ログイン者とユーザー一致のときのみ編集ページにアクセス可
-before_action :ensure_current_user, {only: [:edit, :update]}
+before_action :ensure_current_user, {only: [:edit, :update]} # edit , update のときのみ
 def ensure_current_user
-  if current_user.id != params[:id].to_i
+  if current_user.id != params[:id].to_i  # ログイン者idと、編集しようとしているユーザーidが異なる場合は、
     flash[:notice]="権限がありません"
     redirect_to user_path(current_user.id)
   end

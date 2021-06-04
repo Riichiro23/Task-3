@@ -25,8 +25,8 @@ before_action :ensure_current_user, {only: [:edit, :update]}
 
     def index  # 全ユーザー投稿一覧画面 # (user_books) # (/users/:user_id/books)
     @books = Book.all
-    @book= Book.new  # books#indexで、新規投稿画面を表示(部分テンプレート用)
-    @user = current_user
+    @book= Book.new  # 部分テンプレート(新規投稿)呼び出すために定義
+    @user = current_user # 部分テンプレート(User info)呼び出すために定義 = 自分のユーザー情報
     end
 
 # ログイン者とユーザー一致のときのみ編集ページにアクセス可

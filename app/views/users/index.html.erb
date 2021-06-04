@@ -5,9 +5,9 @@
  <div class = "container px-5 px-sm-0">
   <div class = "row">
    <div class = "col-md-3">
-    <!--共通部分（User info）
+    <!--共通部分（users/_info）
     <%= render 'users/info', user: @user %>
-    <!--共通部分(New Books)-->
+    <!--共通部分(books/_new)-->
     <%= render 'books/new', book: @book %>
    </div>
    <!--ユーザー投稿一覧-->
@@ -21,9 +21,9 @@
         <th colspan="3"></th>
        </tr>
       </thead>
-      <tbody>  
+      <tbody> 
        <% @users.each do |user| %>
-       <tr>
+       <tr>                         
         <td><%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
         <td><%= user.name %></td>
         <td><%= link_to "Show", user_path(user.id)  %></td>

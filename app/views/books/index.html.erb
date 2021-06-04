@@ -1,8 +1,9 @@
 <div class = "container px-5 px-sm-0">
  <div class = "row">
   <div class = "col-md-3">
-   <!--User info-->
+   <!--共通部分（users/_info）
    <%= render 'users/info', user: @user %>
+   <!--共通部分(books/_new)-->
    <%= render 'books/new', book: @book %>
    </div>
   <!--全ユーザー投稿一覧画面-->
